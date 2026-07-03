@@ -5,21 +5,24 @@
     </div>
     <script>
       let state = {
-        count: 0
+        count: 0,
+        color: "red"
     }
     function onButtonPress(){
       state.count = state.count + 1;
+      state.color = Math.random() > 0.5 ? "red" : "yellow";
      buttonComponentReRender()
     }
 function buttonComponentReRender(){
   document.getElementById("buttonParent").innerHTML="";
-  const component = buttonComponent(state.count);
+  const component = buttonComponent(state.count, state.color);
 document.getElementById("buttonParent").appendChild(component);
 }
-    function buttonComponent(count){
+    function buttonComponent(count, color){
       const button = document.createElement("button");
       button.innerHTML = "counter" + count;
       button.setAttribute("onclick" , `onButtonPress()`);
+      button.setAttribute("style", `color:${color}`);
       return button;
     }
     buttonComponentReRender();
